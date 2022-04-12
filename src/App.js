@@ -20,7 +20,7 @@ function App() {
         <Route path="/tasks/:id" element={<Update />} />
       </Routes>
 
-      {/* <Create /> */}
+
     </>
   )
 }

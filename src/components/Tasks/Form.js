@@ -3,7 +3,7 @@ import { Label, Input } from "@rebass/forms"
 import { useForm } from "react-hook-form"
 import { ThreeDots } from "react-loader-spinner"
 
-export const Form = ({defaultValues, onFormSubmit, isLoading }) => {
+export const Form = ({defaultValues, onFormSubmit, isLoading, btnText }) => {
   const { register, handleSubmit } = useForm({defaultValues})
 
   const onSubmit = handleSubmit((data => {
@@ -21,7 +21,7 @@ export const Form = ({defaultValues, onFormSubmit, isLoading }) => {
         <Input {...register('description', { required: true })} id="description" name="description" type="text" />
       </Box>
       <Button>
-        { isLoading ? <ThreeDots color="#ffffff" height={10} /> : "Submit" }
+        { isLoading ? <ThreeDots color="#ffffff" height={10} /> : `${btnText}` }
       </Button>
     </form>
   )

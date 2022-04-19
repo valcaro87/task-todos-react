@@ -1,16 +1,16 @@
-import { useParams, Routes, Route, useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useMutation, useQuery } from "react-query"
 import { Form } from "./Form"
 import { getTask, updateTask } from "../../api"
-import { Lists } from "./Lists"
 import { Box, Flex } from "rebass/styled-components"
+import { useState } from "react"
 
 export const Update = () => {
   const { id } = useParams()
   const history = useNavigate()
-  const { data, error, isLoading, isError } = useQuery(["task", { id }], getTask)
+  const { data } = useQuery(["task", { id }], getTask)
 
-  const { mutateAsync, isLoading: isMutating } = useMutation(updateTask)
+  const { mutateAsync } = useMutation(updateTask)
   const onFormSubmit = async (data) => {
     await mutateAsync({ ...data, id })
     history('/tasks')
@@ -18,13 +18,16 @@ export const Update = () => {
 
   return (
     <>
-      {!isLoading && (
-        <Flex flexDirection="column" alignItems="center">
-          <Box>
-            <h1>Update Task</h1>
-            <Form defaultValues={data.results} onFormSubmit={onFormSubmit} isLoading={false} btnText="Update" />
-          </Box>
-        </Flex>
+      {data && (
+        <>
+          <Flex flexDirection="column" alignItems="center">
+            <Box>
+              <h1>Update Task</h1>
+
+              <Form defaultValues={data?.results} onFormSubmit={onFormSubmit} isLoading={false} btnText="Update" />
+            </Box>
+          </Flex>
+        </>
       )}
     </>
   )

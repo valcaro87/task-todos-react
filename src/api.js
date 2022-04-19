@@ -51,3 +51,15 @@ export const updateTask = async ({ id, ...data }) => {
 
   return response.json()
 }
+
+export const removeTask = async (id) => {
+  const response = await fetch(`${process.env.REACT_APP_API_SERVER}/api/v1/tasks/${id}`, {
+    method: "DELETE"
+  })
+
+  if (!response.ok) {
+    throw new Error(response.json().message)
+  }
+
+  return true
+}

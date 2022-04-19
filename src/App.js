@@ -6,13 +6,9 @@ import { Update } from "./components/Tasks/Update"
 function App() {
   return (
     <>
-
-
       <div className="App">
         <li> <Link to="/tasks">Tasks</Link> </li>
       </div>
-
-
 
       <Routes>
         <Route path="/tasks" element={<Lists />} />

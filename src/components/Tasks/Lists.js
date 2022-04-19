@@ -1,17 +1,27 @@
-import { useEffect } from "react"
-import { useQuery } from "react-query"
-import { Link} from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useQuery, useMutation } from "react-query"
 import { getAllTasks } from "../../api"
 import { Flex } from "rebass/styled-components"
 import { ThreeDots } from "react-loader-spinner"
 import { ListItem } from "./ListItem"
+import { Create } from "./Create"
+import { createTask } from "../../api"
 
 export const Lists = () => {
   const { data, error, isLoading, isError } = useQuery("tasks", getAllTasks)
+  const getAllTasksData = data?.results
+
+  const [allData, setAllData] = useState(getAllTasksData);
 
   useEffect(() => {
+    setAllData(getAllTasksData)
+  }, [getAllTasksData])
 
-  },[data])
+  const { mutateAsync } = useMutation(createTask)
+  const onFormSubmit = async (data) => {
+    const response = await mutateAsync({ ...data })
+    setAllData([...allData, response.results])
+  }
 
   if (isLoading) {
     return (
@@ -27,14 +37,21 @@ export const Lists = () => {
 
   return (
     <Flex flexDirection="column" alignItems="center">
-      <h1>Tasks</h1>
 
-      <ul>
-        {data.results.map((d) => (
-          <ListItem key={d.id} {...d}/>
-        ))}
-        <li> <Link to="/tasks/new">+New</Link> </li>
-      </ul>
+      {allData && (
+        <>
+          <h1>Tasks</h1>
+
+          <ul>
+            {allData.map((d) => (
+              <ListItem key={d.id} {...d} isLoading={isLoading} />
+            ))}
+          </ul>
+        </>
+      )}
+
+      <Create onFormSubmit={onFormSubmit} isLoading={isLoading} />
+
     </Flex>
   )
 }

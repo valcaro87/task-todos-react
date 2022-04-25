@@ -5,26 +5,17 @@ import { useForm } from "react-hook-form"
 import { ThreeDots } from "react-loader-spinner"
 
 export const Form = ({defaultValues, onFormSubmit, isLoading, btnText }) => {
-  const aaa = defaultValues
-  const [eachTask, setEachTask] = useState([defaultValues]);
-
-  useEffect(() => {
-    //setEachTask(defaultValues)
-    console.log('fetching....'.aaa)
-  })
 
 
-  const { register, handleSubmit } = useForm({eachTask,defaultValues})
+  const { register, handleSubmit } = useForm({defaultValues})
 
   const onSubmit = handleSubmit((data => {
     onFormSubmit(data)
   }))
 
-  console.log(eachTask?.title)
 
   return (
     <form onSubmit={onSubmit}>
-      {`${aaa?.results?.title} - ${aaa?.results?.description}`}
       <Box>
         <Label>Title: </Label>
         <Input {...register('title', { required: true })} id="title" name="title" type="text" />

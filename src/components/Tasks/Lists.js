@@ -8,14 +8,12 @@ import { Create } from "./Create"
 import { createTask } from "../../api"
 
 export const Lists = () => {
-  const { data, error, isLoading, isError } = useQuery("tasks", getAllTasks)
-  const getAllTasksData = data?.results
-
-  const [allData, setAllData] = useState(getAllTasksData);
+  const [allData, setAllData] = useState()
+  const { data: getAllTasksData, error, isLoading, isError } = useQuery("tasks", getAllTasks)
 
   useEffect(() => {
-    setAllData(getAllTasksData)
-  }, [getAllTasksData])
+    setAllData(getAllTasksData?.results)
+  }, [getAllTasksData?.results])
 
   const { mutateAsync } = useMutation(createTask)
   const onFormSubmit = async (data) => {

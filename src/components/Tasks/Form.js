@@ -18,11 +18,21 @@ export const Form = ({defaultValues, onFormSubmit, isLoading, btnText }) => {
     <form onSubmit={onSubmit}>
       <Box>
         <Label>Title: </Label>
-        <Input {...register('title', { required: true })} id="title" name="title" type="text" />
+        <Input
+          {...register('title', { required: true })}
+          id="title"
+          name="title"
+          type="text"
+        />
       </Box>
       <Box>
         <Label>Description: </Label>
-        <Input {...register('description', { required: true })} id="description" name="description" type="text" />
+        <Input
+          {...register('description', { required: true })}
+          id="description"
+          name="description"
+          type="text"
+        />
       </Box>
       <Button>
         { isLoading ? <ThreeDots color="#ffffff" height={10} /> : `${btnText}` }

@@ -17,6 +17,11 @@ export const Update = () => {
     history('/tasks')
   }
 
+  const [statez, setStatez] = useState(Date.now())
+  useEffect(() => {
+    setStatez(Date.now())
+  }, [data])
+
   return (
     <>
       {data && (
@@ -25,7 +30,7 @@ export const Update = () => {
             <Box>
               <h1>Update Task</h1>
 
-              <Form defaultValues={data?.results} onFormSubmit={onFormSubmit} isLoading={false} btnText="Update" />
+              <Form key={statez} defaultValues={data?.results} onFormSubmit={onFormSubmit} isLoading={false} btnText="Update" />
             </Box>
           </Flex>
         </>

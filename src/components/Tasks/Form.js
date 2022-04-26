@@ -7,10 +7,11 @@ import { ThreeDots } from "react-loader-spinner"
 export const Form = ({defaultValues, onFormSubmit, isLoading, btnText }) => {
 
 
-  const { register, handleSubmit } = useForm({defaultValues})
+  const { register, handleSubmit, reset } = useForm({defaultValues})
 
   const onSubmit = handleSubmit((data => {
     onFormSubmit(data)
+    reset()
   }))
 
 

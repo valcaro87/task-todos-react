@@ -19,6 +19,8 @@ export const Lists = () => {
   const onFormSubmit = async (data) => {
     const response = await mutateAsync({ ...data })
     setAllData([...allData, response.results])
+    // add multiple arrays
+    // setAllData([...allData, response.results, {id: 999, title: 'fake', description: 'news'}])
   }
 
   if (isLoading) {

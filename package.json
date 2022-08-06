@@ -5,7 +5,7 @@
   "engines": {
     "node": "16.13.1",
     "npm": "8.1.2"
-  }
+  },
   "private": true,
   "dependencies": {
     "@rebass/forms": "^4.0.6",

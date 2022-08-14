@@ -1,4 +1,5 @@
-import { Form } from "./Form";
+import React from "react"
+import { Form } from "./Form"
 import { Box, Flex } from "rebass/styled-components"
 
 export const Create = ({onFormSubmit, isLoading}) => {

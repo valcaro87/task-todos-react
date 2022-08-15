@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useMutation, useQuery } from "react-query"
 import { Link } from "react-router-dom"
@@ -16,8 +16,8 @@ export const Update = () => {
   const { mutateAsync } = useMutation(updateTask)
   const onFormSubmit = async (data) => {
     await mutateAsync({ ...data, id })
-    //setStatez(Date.now())
-    history('/tasks/')
+    // setStatez(Date.now())
+    // history('/tasks/')
   }
 
 
